@@ -1,0 +1,92 @@
+### Useful Aliases ###
+
+## LXD ##
+#lxcsh() { lxc exec "$1" -- sudo --login --user $2; }
+function lxcsh() {
+        XT=$TERM
+	TERM=xterm-256color
+	command lxc exec "$1" -- su $2;
+	TERM=$XT
+}
+
+function lxg() {
+        XT=$TERM
+	TERM=xterm-256color
+	command lxc exec "$1" -- sudo --user $2 --login;
+	TERM=$XT
+}
+## Code ##
+# autocompile with gcc
+compile_c () {     
+   gcc $1 -Wall -pedantic -std=c11 -lm -o ${1%.*}
+}
+compile_debug_c () {     
+   gcc $1 -Wall -DDEBUG -pedantic -std=c11 -lm -o ${1%.*}
+}
+# file can be compiled directly
+#alias -s c='compile_c'
+alias gc='compile_c'
+alias gcd='compile_debug_c'
+# Rust compile aliases
+alias crr="screen -mS $(basename $(pwd)) cargo run"
+alias crd="cargo run"
+alias crc='cargo check'
+alias crb='cargo build'
+alias crt='cargo test'
+
+# Server
+alias srv='ssh lxc@192.168.1.10'
+alias spi='ssh lxc@192.168.1.32'
+
+# Terminal
+alias ll='exa --long --all'
+alias cls='clear -x && ls'
+alias gop='gio open'
+alias c='clear -x'
+alias hx='helix'
+alias lv='lvim'
+export EDITOR='lvim'
+alias run='./build/apps/program'
+EDITOR=lvim
+
+# call this function with the command and then $@
+function prevent_garbage_kitty_term() {
+	TERM=xterm-256color
+        command $@
+	TERM=alacritty
+}
+# eg:
+alias lxc="prevent_garbage_kitty_term lxc $@"
+alias ssh="prevent_garbage_kitty_term ssh $@"
+alias p='sudo pacman'
+alias src='source ~/.bashrc'
+alias mca='make clean all'
+
+
+
+# UNUSED
+# export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/x11/xinitrc"
+# #export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority" # This line will break some DMs.
+# export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+# #export ALSA_CONFIG_PATH="$XDG_CONFIG_HOME/alsa/asoundrc"
+# #export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
+# export KODI_DATA="${XDG_DATA_HOME:-$HOME/.local/share}/kodi"
+# export UNISON="${XDG_DATA_HOME:-$HOME/.local/share}/unison"
+#
+# # Other program settings:
+# export DICS="/usr/share/stardict/dic/"
+# export SUDO_ASKPASS="$HOME/.local/bin/dmenupass"
+# export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
+# export LESS=-R
+# export LESS_TERMCAP_mb="$(printf '%b' '^[[1;31m')"
+# export LESS_TERMCAP_md="$(printf '%b' '^[[1;36m')"
+# export LESS_TERMCAP_me="$(printf '%b' '^[[0m')"
+# export LESS_TERMCAP_so="$(printf '%b' '^[[01;44;33m')"
+# export LESS_TERMCAP_se="$(printf '%b' '^[[0m')"
+# export LESS_TERMCAP_us="$(printf '%b' '^[[1;32m')"
+# export LESS_TERMCAP_ue="$(printf '%b' '^[[0m')"
+# export LESSOPEN="| /usr/bin/highlight -O ansi %s 2>/dev/null"
+# export QT_QPA_PLATFORMTHEME="gtk2"      # Have QT use gtk2 theme.
+# export MOZ_USE_XINPUT2="1"              # Mozilla smooth scrolling/touchpads.
+# export AWT_TOOLKIT="MToolkit wmname LG3D"       #May have to install wmname
+# export _JAVA_AWT_WM_NONREPARENTING=1    # Fix for Java applications in dwm

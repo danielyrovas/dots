@@ -1,0 +1,12 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# source generic shell
+source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/rc
+
+# load all files from .config/shell/zshrc.d directory
+if [ -d ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshrc.d ]; then
+  for file in ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshrc.d/*; do
+    source $file
+  done
+fi

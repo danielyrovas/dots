@@ -1,0 +1,9 @@
+# Shell configuration file - should work with any POSIX environment
+# 	use bashrc or zshrc for incompatible configs
+#
+# load all files from .config/shell/rc.d directory
+if [ -d ${XDG_CONFIG_HOME:-$HOME/.config}/shell/rc.d ]; then
+for file in ${XDG_CONFIG_HOME:-$HOME/.config}/shell/rc.d/*; do
+    source $file
+  done
+fi
