@@ -1,0 +1,64 @@
+[user]
+    name = Daniel Yrovas
+    email = dan@danielyrovas.com
+{{- if eq .chezmoi.hostname "desktop" }}
+    signingkey = {{ .gpg.desktop }}
+{{- else if eq .chezmoi.hostname "xps-laptop" }}
+    signingkey = {{ .gpg.laptop }}
+{{- end }}
+[init]
+    defaultBranch = trunk
+[ui "color"]
+    ui = always
+[color]
+    ui = true
+[core]
+    safecrlf = false
+[merge]
+    tool = nvim -d
+[alias]
+    c = commit
+    cm = commit -m
+    ca = commit --amend --no-edit
+    cma = commit --amend -m
+    s = status
+    st = status -u
+    lg = log --oneline
+    last = log -1 HEAD
+    cl = log -p -- ':(exclude)Cargo.lock'
+    f = push --force-with-lease
+    # https://stackoverflow.com/a/11688523/472927
+    ss = "!f() { git stash show stash^{/$*} -p; }; f"
+    sa = "!f() { git stash apply stash^{/$*}; }; f"
+    sl = stash list
+    sdiff = !git diff && git submodule foreach 'git diff'
+    spush = push --recurse-submodules=on-demand
+    supdate = submodule update --remote --merge
+    alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
+[pull]
+    ff = only
+[push]
+    default = simple
+[help]
+    autocorrect = 1
+[url "git@github.com:"]
+    insteadOf = gh:
+[github]
+    user = danielyrovas
+[diff]
+    algorithm = patience
+    compactionHeuristic = true
+[commit]
+{{- if eq .chezmoi.hostname "desktop" }}
+    gpgsign = true
+{{- end }}
+{{- if eq .chezmoi.hostname "xps-laptop" }}
+    gpgsign = true
+{{- end }}
+[protocol]
+    version = 2
+[sendemail]
+    smtpserver = /usr/bin/msmtp
+    annotate = yes
+[diff "odf"]
+    textconv = odt2txt
