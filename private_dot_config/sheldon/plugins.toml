@@ -14,10 +14,29 @@ shell = "zsh"
 
 [plugins]
 
-[plugins.syntax-hl]
-git = 'https://github.com/zsh-users/zsh-syntax-highlighting'
+[plugins.powerlevel10k]
+github = 'romkatv/powerlevel10k'
+
+[plugins.zsh-defer]
+github = 'romkatv/zsh-defer'
+
+[plugins.zsh-syntax-hl]
+github = 'zsh-users/zsh-syntax-highlighting'
+apply = ["defer"]
+
+[plugins.zsh-autosuggestions]
+github = 'zsh-users/zsh-autosuggestions'
+use = ['{{ name }}.zsh']
+apply = ["defer"]
+
+[plugins."z.lua"]
+github = 'skywind3000/z.lua'
+apply = ["defer"]
 
 # For example:
 #
 # [plugins.base16]
 # github = "chriskempson/base16-shell"
+
+[templates]
+defer = { value = 'zsh-defer source "{{ file }}"', each = true }

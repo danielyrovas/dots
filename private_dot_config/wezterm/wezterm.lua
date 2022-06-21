@@ -8,13 +8,13 @@ local catppuccin = require 'colors/catppuccin'.setup {
 
 return {
   -- Appearance
+  colors = catppuccin,
   font = wezterm.font("JetBrains Mono"),
   font_size = 14,
   enable_tab_bar = true,
   use_fancy_tab_bar = false,
   hide_tab_bar_if_only_one_tab = true,
   tab_bar_at_bottom = true,
-  colors = catppuccin,
   window_decorations = "NONE",
   window_padding = {
     left = 20,
@@ -29,4 +29,7 @@ return {
       username = "lxc"
     },
   },
+
+  -- Functionality
+  clean_exit_codes = { 130, 127 },
 }
