@@ -21,4 +21,9 @@ alias \
   ch="chezmoi" \
   cha="chezmoi add" \
   chd="chezmoi diff" \
+  chcd="chezmoi cd" \
   chap="chezmoi apply"
+
+alias \
+  pacman="sudo pacman"
+  p="pacman"
