@@ -21,6 +21,3 @@ export WEECHAT_HOME="$XDG_CONFIG_HOME/weechat"
 export MBSYNCRC="$XDG_CONFIG_HOME/mbsync/config"
 export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
 export _Z_DATA="$XDG_CACHE_HOME/z"
-
-# Path
-[ -d $XDG_DATA_HOME/cargo/env ] && source "$XDG_DATA_HOME/cargo/env"
