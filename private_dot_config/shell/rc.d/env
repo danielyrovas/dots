@@ -1,5 +1,5 @@
 # Default Apps
-export EDITOR=vim
+export EDITOR=nvim
 
 # Clean ~/
 export XDG_CONFIG_HOME="$HOME/.config"

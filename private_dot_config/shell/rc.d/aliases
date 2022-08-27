@@ -18,11 +18,9 @@ alias \
   ip="ip -color=auto"
 
 alias \
-  ch="chezmoi" \
-  cha="chezmoi add" \
-  chd="chezmoi diff" \
-  chcd="chezmoi cd" \
-  chap="chezmoi apply"
+  chez="chezmoi" \
+  cheza="chezmoi add" \
+  chezaddnvim="chezmoi add ~/.config/nvim/lua/custom"
 
 alias \
   pacman="sudo pacman"

@@ -1,114 +1,117 @@
 local M = {}
 
 M.mason = {
-  ensure_installed = {
-    -- lua stuff
-    "lua-language-server",
-    "stylua",
+	ensure_installed = {
+		-- lua stuff
+		"lua-language-server",
+		"stylua",
 
-    -- web dev
-    "css-lsp",
-    "html-lsp",
-    "typescript-language-server",
-    -- "deno",
-    "emmet-ls",
-    "json-lsp",
+		-- Rust development
+		"rust-analyzer",
 
-    -- shell
-    "shfmt",
-    "shellcheck",
+		-- web dev
+		"css-lsp",
+		"html-lsp",
+		"typescript-language-server",
+		-- "deno",
+		"emmet-ls",
+		"json-lsp",
 
-    -- java
-    "jdtls",
-  },
+		-- shell
+		"shfmt",
+		"shellcheck",
+
+		-- java
+		"jdtls",
+	},
 }
 
 -- local cmp = require "nvim-cmp"
 M.cmp = {
-  sources = {
-    { name = "luasnip" },
-    { name = "nvim_lsp" },
-    { name = "buffer" },
-    { name = "nvim_lua" },
-    { name = "path" },
-    { name = "rg" },
-    { name = "cmp_git" },
-  },
+	sources = {
+		{ name = "luasnip" },
+		{ name = "nvim_lsp" },
+		{ name = "buffer" },
+		{ name = "nvim_lua" },
+		{ name = "path" },
+		{ name = "rg" },
+		{ name = "cmp_git" },
+	},
 }
 
 M.treesitter = {
-  ensure_installed = {
-    "bash",
-    "c",
-    "c_sharp",
-    "cmake",
-    "comment",
-    "cpp",
-    "css",
-    "dart",
-    "dockerfile",
-    "fennel",
-    "fish",
-    "go",
-    "graphql",
-    "haskell",
-    "help",
-    "html",
-    "java",
-    "javascript",
-    "json",
-    "kotlin",
-    "latex",
-    "lua",
-    "make",
-    "markdown",
-    "markdown_inline",
-    "php",
-    "python",
-    "regex",
-    "ruby",
-    "rust",
-    "sql",
-    "teal",
-    "toml",
-    "typescript",
-    "tsx",
-    "vim",
-    "yaml",
-    "zig",
-  },
+	ensure_installed = {
+		"bash",
+		"c",
+		"c_sharp",
+		"cmake",
+		"comment",
+		"cpp",
+		"css",
+		"dart",
+		"dockerfile",
+		"fennel",
+		"fish",
+		"go",
+		"graphql",
+		"haskell",
+		"help",
+		"html",
+		"java",
+		"javascript",
+		"json",
+		"kotlin",
+		"latex",
+		"lua",
+		"make",
+		"markdown",
+		"markdown_inline",
+		"php",
+		"python",
+		"regex",
+		"ruby",
+		"rust",
+		"sql",
+		"teal",
+		"toml",
+		"typescript",
+		"tsx",
+		"vim",
+		"yaml",
+		"zig",
+	},
 }
 
 M.nvimtree = {
-  git = {
-    enable = true,
-  },
+	git = {
+		enable = true,
+	},
 
-  renderer = {
-    highlight_git = true,
-    icons = {
-      show = {
-        git = true,
-      },
-    },
-  },
+	renderer = {
+		highlight_git = true,
+		icons = {
+			show = {
+				git = true,
+			},
+		},
+	},
 }
 
 M.blankline = {
-  filetype_exclude = {
-    "help",
-    "mason.nvim",
-    "terminal",
-    "alpha",
-    "packer",
-    "lspinfo",
-    "TelescopePrompt",
-    "TelescopeResults",
-    "nvchad_cheatsheet",
-    "lsp-installer",
-    "norg",
-    "",
-  },
+	filetype_exclude = {
+		"help",
+		"mason.nvim",
+		"terminal",
+		"alpha",
+		"packer",
+		"lspinfo",
+		"TelescopePrompt",
+		"TelescopeResults",
+		"nvchad_cheatsheet",
+		"lsp-installer",
+		"norg",
+		"",
+	},
 }
 
 return M

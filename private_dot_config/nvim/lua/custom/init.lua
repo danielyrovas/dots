@@ -3,3 +3,6 @@
 -- you can even override default options here (core/options.lua)
 
 -- vim.g.luasnippets_path = "~/.config/nvim/lua/custom/snips"
+local opt = vim.opt
+
+opt.mousemodel = "extend"

@@ -34,6 +34,7 @@
     sdiff = !git diff && git submodule foreach 'git diff'
     spush = push --recurse-submodules=on-demand
     supdate = submodule update --remote --merge
+    publish = !git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\"
     alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 [pull]
     ff = only
