@@ -49,6 +49,11 @@
 [diff]
     algorithm = patience
     compactionHeuristic = true
+    tool = nvimdiff
+[difftool]
+    prompt = false
+[diff "nvimdiff"]
+    cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [commit]
 {{- if eq .chezmoi.hostname "desktop" }}
     gpgsign = true
