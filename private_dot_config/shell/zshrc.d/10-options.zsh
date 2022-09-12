@@ -11,14 +11,13 @@ unsetopt beep
 # VI keymaps for line editing
 bindkey -v
 bindkey "^A"    beginning-of-line                    # ctrl-a
-bindkey "^B"    backward-char                        # ctrl-b
 bindkey "^E"    end-of-line                          # ctrl-e
 bindkey "^[[3~" delete-char                          # DEL
-bindkey "^N"    down-line-or-search                  # ctrl-n
-bindkey "^P"    up-line-or-search                    # ctrl-p
+bindkey "^[[B"  down-line-or-search                  # ctrl-n
+bindkey "^[[A"  up-line-or-search                    # ctrl-p
 bindkey "^R"    history-incremental-search-backward  # ctrl-r
-bindkey "^[[B"  history-search-forward               # down arrow
-bindkey "^[[A"  history-search-backward              # up arrow
+bindkey "^N"    history-search-forward               # down arrow
+bindkey "^P"    history-search-backward              # up arrow
 
 autoload -U edit-command-line
 zle -N edit-command-line
