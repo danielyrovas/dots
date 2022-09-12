@@ -25,3 +25,6 @@ alias \
 alias \
   pacman="sudo pacman"
   p="pacman"
+
+alias \
+  nv="nvim"

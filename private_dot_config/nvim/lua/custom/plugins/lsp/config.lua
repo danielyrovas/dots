@@ -1,15 +1,15 @@
 local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
-local lspconfig = require("lspconfig")
+local lspconfig = require "lspconfig"
 local servers = { "html", "cssls", "emmet_ls", "clangd", "jsonls", "tsserver", "jdtls", "rust_analyzer" } -- manual specification > multiple plugins
 
 local config = {
-	virtual_text = true, -- disable virtual text
-	update_in_insert = true,
-	underline = false,
-	severity_sort = true,
-	--[[ float = {
+  virtual_text = true,
+  update_in_insert = true,
+  underline = false,
+  severity_sort = true,
+  --[[ float = {
     focusable = false,
     style = "minimal",
     border = "rounded",
@@ -22,8 +22,8 @@ local config = {
 vim.diagnostic.config(config)
 
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
+  lspconfig[lsp].setup {
+    on_attach = on_attach,
+    capabilities = capabilities,
+  }
 end
