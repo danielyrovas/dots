@@ -18,7 +18,7 @@ return {
 	hide_tab_bar_if_only_one_tab = true,
 	tab_bar_at_bottom = true,
 	check_for_updates = false,
-	window_decorations = "NONE",
+	window_decorations = "RESIZE",
 	-- window_background_image = "/home/danielyrovas/Pictures/Mist.jpg",
 	window_background_opacity = 1,
 	window_padding = {
@@ -37,4 +37,8 @@ return {
 
 	-- Functionality
 	clean_exit_codes = { 130, 127 },
+
+	keys = {
+		{ key = "Enter", mods = "ALT", action = "DisableDefaultAssignment" },
+	},
 }
