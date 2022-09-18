@@ -27,6 +27,7 @@ M.general = {
     ["<S-h>"] = { "<CMD> bprevious <CR>", "previous bufferr", opts = { silent = true } },
     ["<S-l>"] = { "<CMD> bnext <CR>", "next bufferr", opts = { silent = true } },
     ["<S-q><S-q>"] = { "gqap" },
+    [";"] = { ":", "command mode", opts = { nowait = true } },
     -- copy to clipboard without newline characters
   },
 
