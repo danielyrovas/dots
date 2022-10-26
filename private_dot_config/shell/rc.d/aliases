@@ -28,3 +28,6 @@ alias \
 
 alias \
   nv="nvim"
+
+alias \
+ spotdlnew="spotdl sync --save-file sync.spotdl"
