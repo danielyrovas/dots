@@ -2,7 +2,7 @@ local on_attach = require("plugins.configs.lspconfig").on_attach
 local capabilities = require("plugins.configs.lspconfig").capabilities
 
 local lspconfig = require "lspconfig"
-local servers = { "html", "cssls", "emmet_ls", "clangd", "jsonls", "tsserver", "jdtls", "rust_analyzer" } -- manual specification > multiple plugins
+local servers = { "html", "cssls", "emmet_ls", "clangd", "jsonls", "tsserver", "jdtls", "rust_analyzer", "pyright" } -- manual specification > multiple plugins
 
 local config = {
   virtual_text = true,

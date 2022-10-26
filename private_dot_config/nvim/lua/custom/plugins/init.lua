@@ -81,11 +81,23 @@ return {
   -- Will refactor
   ["phaazon/hop.nvim"] = {
     branch = "v2", -- optional but strongly recommended
+    disable = true,
     event = "VimEnter",
     config = function()
       -- you can configure Hop the way you like here; see :h hop-config
       require("hop").setup { keys = "arstdhneioqwfpluyxzcvkm" }
     end,
+  },
+
+  ["ggandor/leap.nvim"] = {
+    event = "VimEnter",
+    config = function()
+      require("leap").add_default_mappings()
+    end,
+  },
+
+  ["tpope/vim-repeat"] = {
+    event = "VimEnter",
   },
 
   ["rmagatti/auto-session"] = {
@@ -95,9 +107,24 @@ return {
         auto_session_suppress_dirs = { "~/", "~/Downloads", "/", "~/Documents" },
         auto_save_enabled = true,
         auto_restore_enabled = true,
+        pre_save_cmds = {
+          function()
+            local buffers = vim.api.nvim_list_bufs()
+            for _, buffer in ipairs(buffers) do
+              if
+                vim.api.nvim_buf_get_name(buffer) == ""
+                or vim.api.nvim_buf_get_name(buffer) == "[No Name]"
+                or vim.api.nvim_buf_get_name(buffer) == "-MINIMAP-"
+              then
+                vim.api.nvim_command("bwipeout! " .. buffer)
+              end
+            end
+          end,
+        },
       }
     end,
   },
+
   ["rmagatti/session-lens"] = {
     after = "telescope.nvim",
     requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
@@ -110,6 +137,15 @@ return {
     disable = true,
     config = function()
       require("incline").setup()
+    end,
+  },
+
+  ["nvim-treesitter/nvim-treesitter-context"] = {
+    after = "nvim-treesitter",
+    config = function()
+      require("treesitter-context").setup {
+        enable = true,
+      }
     end,
   },
 }

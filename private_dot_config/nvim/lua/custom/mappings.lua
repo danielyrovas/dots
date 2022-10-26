@@ -80,9 +80,9 @@ local hopping = {
 }
 
 M.hop = {
-  n = hopping,
-  v = hopping,
-  o = hopping,
+  -- n = hopping,
+  -- v = hopping,
+  -- o = hopping,
 }
 -- M.treesitter = {
 --   n = {
