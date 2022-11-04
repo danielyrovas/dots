@@ -33,10 +33,5 @@ apply = ["defer"]
 github = 'skywind3000/z.lua'
 apply = ["defer"]
 
-# For example:
-#
-# [plugins.base16]
-# github = "chriskempson/base16-shell"
-
 [templates]
-defer = { value = 'zsh-defer source "{{ file }}"', each = true }
+defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"

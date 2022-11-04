@@ -29,5 +29,14 @@ alias \
 alias \
   nv="nvim"
 
+spotdlnew () {     
+   mkdir $1 || exit(1)
+   cd $1
+   spotdl sync --save-file sync.spotdl $2
+   cd -
+}
+
 alias \
- spotdlnew="spotdl sync --save-file sync.spotdl"
+ sdlnew="spotdlnew" \
+ sdlsync="spotdl sync sync.spotdl"
+
