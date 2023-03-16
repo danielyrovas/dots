@@ -28,12 +28,8 @@ alias \
 alias \
   nv="nvim"
 
-_zellij_default_session() {
-    zellij attach session #&& exit
-    zellij --session session
-}
 alias \
-    s='_zellij_default_session'
+    s='zellij attach session --create'
 
 alias \
   tl="tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr"
@@ -73,7 +69,10 @@ alias src='source_shell'
 
 # Terminal
 alias \
-    ll='exa --long --all' \
+    ls='exa --group-directories-first --icons' \
+    ll='ls -lh --git' \
+    la='ll -a' \
+    tree='ls -h --git --tree --level=2' \
     cls='clear -x && ls' \
     gop='gio open' \
     c='clear -x' \

@@ -4,6 +4,12 @@
 # it produces, if any.
 # It's needed because some shell commands, like `cd`,
 # have no useful effect if executed in a subshell.
+
+if ! command -v broot &> /dev/null
+then
+    exit
+fi
+
 function br {
     local cmd cmd_file code
     cmd_file=$(mktemp)
@@ -17,3 +23,9 @@ function br {
         return "$code"
     fi
 }
+
+function tre {
+     br -c :pt "$@"
+}
+
+# alias bs="br --conf ~/.config/broot/select.toml"

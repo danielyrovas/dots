@@ -1,15 +1,22 @@
 local wezterm = require("wezterm")
-local catppuccin = require("colors/catppuccin").setup({
-	sync_flavours = {
-		light = "latte",
-		dark = "mocha",
-	},
-})
+-- local catppuccin = require("colors/catppuccin").setup({
+-- 	sync_flavours = {
+-- 		light = "latte",
+-- 		dark = "mocha",
+-- 	},
+-- })
+
+-- wezterm.on('gui-startup', function(cmd)
+-- end
+-- )
 
 return {
 	-- Appearance
 	-- color_scheme = "catppuccin",
-	colors = catppuccin,
+	-- colors = catppuccin,
+    -- default_prog
+    -- default_gui_startup_args = { 'start', '--', 'zellij', 'attach', 'session', '--create' },
+    color_scheme = "tokyonight-storm",
 	font = wezterm.font("JetBrains Mono"),
 	font_size = 14,
 	warn_about_missing_glyphs = false,

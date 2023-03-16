@@ -1,0 +1,51 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+## Auto attach to zellij session
+zellij_auto_attach() {
+    if [[ -z "$ZELLIJ" ]]; then
+        zellij attach -c session
+        exit
+    fi
+}
+alias s=zellij_auto_attach
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+type sheldon &>/dev/null && \
+    eval "$(sheldon source)"
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+type brew &>/dev/null && \
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+autoload -Uz compinit
+compinit
+
+zmodload zsh/complist
+_comp_options+=(globdots)		# Include hidden files.
+zle_highlight=('paste:none')
+
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' file-sort access
+zstyle ':completion:*' ignore-parents parent pwd directory
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' max-errors 1
+# zstyle ':completion:*' menu select=long
+zstyle ':completion:*' menu yes select
+zstyle ':completion:*' original true
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle :compinstall filename '~/.config/zsh/.zshrc'
+
+compinit -C
