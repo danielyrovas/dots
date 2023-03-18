@@ -5,6 +5,8 @@
     signingkey = {{ .gpg.desktop }}
 {{- else if eq .chezmoi.hostname "xps-laptop" }}
     signingkey = {{ .gpg.laptop }}
+{{- else if eq .chezmoi.hostname "M1330" }}
+    signingkey = {{ .gpg.mactop }}
 {{- end }}
 [init]
     defaultBranch = trunk
@@ -14,8 +16,11 @@
     ui = true
 [core]
     safecrlf = false
+    pager = delta
+	autocrlf = input
 [merge]
     tool = nvim -d
+    conflictstyle = diff3
 [alias]
     c = commit
     cm = commit -m
@@ -50,6 +55,7 @@
     algorithm = patience
     compactionHeuristic = true
     tool = nvimdiff
+    colorMoved = default
 [difftool]
     prompt = false
 [diff "nvimdiff"]
@@ -68,3 +74,9 @@
     annotate = yes
 [diff "odf"]
     textconv = odt2txt
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)

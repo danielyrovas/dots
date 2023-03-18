@@ -1,0 +1,39 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+## Auto attach to zellij session
+zellij_auto_attach() {
+    if [[ -z "$ZELLIJ" ]]; then
+        zellij attach -c session
+        exit
+    fi
+}
+alias s=zellij_auto_attach
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+type sheldon &>/dev/null && eval "$(sheldon source)"
+
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+type brew &>/dev/null && FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' menu yes select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+zmodload zsh/complist
+_comp_options+=(globdots)		# Include hidden files.
+zle_highlight=('paste:none')
+
+# for dump in "$ZDOTDIR/.zcompdump"(N.mh+24); do
+#   compinit
+# done
+compinit -C
