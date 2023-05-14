@@ -1,0 +1,86 @@
+xetex
+s
+s
+ssh lxc@192.168.0.164
+clera
+clear
+exec zsh
+s
+zellij_auto_attach
+mv .zshenv2 .zshenv
+nvim /etc/zshrc
+nvim
+echo $PATH
+clear
+bash
+zsh
+s
+brew
+if command -v /opt/homebrew/bin/brew &> /dev/null\
+then\
+    eval "$(/opt/homebrew/bin/brew shellenv)"\
+fi\
+
+brew
+brew
+sheldon
+clera
+clear
+exec zsh
+brew
+src
+nvim
+brew
+sheldon lock
+exec zsh
+s
+which zellij
+sheldon
+brew
+ls /opt
+ls /opt/homebrew
+ls /opt/homebrew/bin
+clear
+echo $PATH
+echo $PATH | grep homebrew
+source ~/.config/zsh/defer/homebrew.zsh
+zellij
+clear
+nvim
+z
+cd ~/.config/zsh
+ls
+ls defer
+ls defer/sr
+ls defer/
+ls src
+nvim .zshenv .zshrc defer/homebrew.zsh
+mv defer/homebrew.zsh src/
+ls
+nv cmp
+nv src/homebrew.zsh
+vim src/homebrew.zsh .zshrc
+s
+s
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+sheldon lock
+sheldon lock
+sheldon lock
+exec zsh
+clear
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh
+exec zsh

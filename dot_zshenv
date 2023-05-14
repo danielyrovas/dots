@@ -5,5 +5,3 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 source "$ZDOTDIR/.zshenv"
-source "$ZDOTDIR/.zprofile"
-source "$ZDOTDIR/.zshrc"

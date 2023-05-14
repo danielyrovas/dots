@@ -24,6 +24,7 @@ export ELECTRUMDIR="$XDG_DATA_HOME/electrum"
 export _ZL_DATA="$XDG_CACHE_HOME/z"
 export INPUTRC="$XDG_CONFIG_HOME/shell/inputrc"
 export GNUPGHOME="$XDG_DATA_HOME/gnupg"
+export SOLARGRAPH_CACHE="$XDG_DATA_HOME/solargraph"
 
 export ANDROID_HOME="$XDG_DATA_HOME/android"
 export ANDROID_SDK_HOME="$XDG_CONFIG_HOME/android"
@@ -37,3 +38,12 @@ export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"
+
+VIMRC_INIT='if !has("nvim") | let $MYVIMRC = "$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC | endif'
+alias vim="VIMINIT='$VIMRC_INIT' vim"
+
+
+
+# App Settings via env
+export FZF_DEFAULT_OPTS='--layout=reverse --border' # --height 40% 
+export FZ_HISTORY_CD_CMD=_zlua

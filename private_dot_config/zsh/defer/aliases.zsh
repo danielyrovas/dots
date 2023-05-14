@@ -1,10 +1,16 @@
+# Short aliases
+alias \
+  s='zellij attach session --create' \
+  nv="nvim"
+
 # Verbosity settings
 alias \
   cp="cp -iv" \
   mv="mv -iv" \
   rm="rm -vI" \
   bc="bc -ql" \
-  mkd="mkdir -pv"
+  mkd="mkdir -pv" \
+  ...="../.."
 
 # Colourize commands when possible.
 alias \
@@ -16,32 +22,35 @@ alias \
 
   # ls="ls -hN --color=auto --group-directories-first"
 
+# Terminal
+alias \
+    ls='exa --group-directories-first --icons' \
+    la='ls -a' \
+    ll='ls -lh --git' \
+    lla='ll -a' \
+    tree='ls -h --git --tree --level=2' \
+    gop='gio open' \
+    c='/usr/bin/clear -x' \
+    cls='c && ls' \
+    clear='tput reset'
+
 alias \
   chez="chezmoi" \
   cheza="chezmoi add" \
   chezaddnvim="chezmoi add ~/.config/nvim/lua/custom"
 
 alias \
-  pacman="sudo pacman"
-  p="pacman"
-
-alias \
-  nv="nvim"
-
-alias \
-    s='zellij attach session --create'
-
-alias \
   tl="tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr"
 
-# Rust compile aliases
+# Temp aliases
+alias srv='ssh lxc@192.168.0.164'
+alias srs='ssh lxc@192.168.0.189'
+
+# Rust compile  aliases
+# TODO: update to cargo watch
 alias \
-    crs="screen -mS $(basename $(pwd)) cargo run" \
-    cre="screen -r $(basename $(pwd))" \
-    crr="cargo run" \
-    crc='cargo check' \
-    crb='cargo build' \
-    crt='cargo test'
+    cr="screen -mS $(basename $(pwd)) cargo run" \
+    cs="screen -r $(basename $(pwd))"
 
 # autocompile with gcc
 _compile_c () {     
@@ -66,17 +75,9 @@ source_shell () {
     fi
 }
 alias src='source_shell'
-
-# Terminal
 alias \
-    ls='exa --group-directories-first --icons' \
-    ll='ls -lh --git' \
-    la='ll -a' \
-    tree='ls -h --git --tree --level=2' \
-    cls='clear -x && ls' \
-    gop='gio open' \
-    c='clear -x' \
-    hx='helix'
+    glowr='exa *.md | entr -c glow' \
+    rmquarantine='xattr -d com.apple.quarantine'
 
 ## LXD ##
 #lxcsh() { lxc exec "$1" -- sudo --login --user $2; }
@@ -103,8 +104,3 @@ function lxg() {
 # eg:
 #alias lxc="prevent_garbage_kitty_term lxc $@"
 #alias ssh="prevent_garbage_kitty_term ssh $@"
-
-# Temp aliases
-# Server
-alias srv='ssh lxc@192.168.1.10'
-alias spi='ssh lxc@192.168.1.32'

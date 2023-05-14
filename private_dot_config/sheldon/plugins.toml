@@ -12,6 +12,10 @@ github = 'romkatv/zsh-defer'
 # github = 'zsh-users/zsh-syntax-highlighting'
 # apply = ["defer"]
 
+[plugins.fast-syntax-hl]
+github = 'zdharma-continuum/fast-syntax-highlighting'
+apply = ['defer']
+
 [plugins.zsh-autosuggestions]
 github = 'zsh-users/zsh-autosuggestions'
 use = ['{{ name }}.zsh']
@@ -20,6 +24,10 @@ apply = ["defer"]
 [plugins."z.lua"]
 github = 'skywind3000/z.lua'
 apply = ["defer"]
+
+[plugins.fz]
+github = 'changyuheng/fz'
+apply = ['defer']
 
 [plugins.forgit]
 github = 'wfxr/forgit'
@@ -57,12 +65,13 @@ apply = ["fpath"]
 github = 'mdumitru/fancy-ctrl-z'
 apply = ["defer"]
 
-[plugins.fast-syntax-hl]
-github = 'zdharma-continuum/fast-syntax-highlighting'
-apply = ['defer']
-
 [plugins.zinsults]
 github = 'ahmubashshir/zinsults'
+apply = ['defer']
+
+[plugins.zsh-notify]
+github = 'marzocchi/zsh-notify'
+apply = ['defer']
 
 [templates]
 defer = "{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}"
