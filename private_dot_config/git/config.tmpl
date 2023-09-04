@@ -6,6 +6,7 @@
 {{- else if eq .chezmoi.hostname "xps-laptop" }}
     signingkey = {{ .gpg.laptop }}
 {{- else if eq .chezmoi.hostname "M1330" }}
+{{- else if eq .chezmoi.hostname "M1330" }}
     signingkey = {{ .gpg.mactop }}
 {{- end }}
 [init]
@@ -17,9 +18,9 @@
 [core]
     safecrlf = false
     pager = delta
-	autocrlf = input
+    autocrlf = input
 [merge]
-    tool = nvim -d
+    tool = nvimdiff1
     conflictstyle = diff3
 [alias]
     c = commit
@@ -45,6 +46,7 @@
     ff = only
 [push]
     default = simple
+	autoSetupRemote = true
 [help]
     autocorrect = 1
 [url "git@github.com:"]
@@ -63,9 +65,9 @@
 [commit]
 {{- if eq .chezmoi.hostname "desktop" }}
     gpgsign = true
-{{- end }}
-{{- if eq .chezmoi.hostname "xps-laptop" }}
+{{- else if eq .chezmoi.hostname "xps-laptop" }}
     gpgsign = true
+{{- else if eq .chezmoi.hostname "M1330" }}
 {{- end }}
 [protocol]
     version = 2
@@ -80,3 +82,5 @@
 [delta]
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+[sequence]
+	editor = interactive-rebase-tool

@@ -11,3 +11,11 @@
 #         exit
 #     fi
 # fi
+
+## Auto attach to zellij session
+_zellij_auto_attach() {
+    if [[ -z "$ZELLIJ" ]]; then
+        zellij attach -c session
+    fi
+}
+alias s=_zellij_auto_attach

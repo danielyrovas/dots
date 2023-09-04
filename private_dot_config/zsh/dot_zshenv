@@ -39,11 +39,11 @@ export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
 export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
 export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"
 
-VIMRC_INIT='if !has("nvim") | let $MYVIMRC = "$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC | endif'
+VIMRC_INIT='let $MYVIMRC = "$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC'
 alias vim="VIMINIT='$VIMRC_INIT' vim"
-
-
 
 # App Settings via env
 export FZF_DEFAULT_OPTS='--layout=reverse --border' # --height 40% 
 export FZ_HISTORY_CD_CMD=_zlua
+
+export PATH="$HOME/.local/bin:$PATH"

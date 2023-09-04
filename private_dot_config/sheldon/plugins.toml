@@ -2,11 +2,14 @@ shell = "zsh"
 
 [plugins]
 
+[plugins.zsh-defer]
+github = 'romkatv/zsh-defer'
+
 [plugins.powerlevel10k]
 github = 'romkatv/powerlevel10k'
 
-[plugins.zsh-defer]
-github = 'romkatv/zsh-defer'
+# [plugins.spaceship]
+# github = 'spaceship-prompt/spaceship-prompt'
 
 # [plugins.zsh-syntax-hl]
 # github = 'zsh-users/zsh-syntax-highlighting'
@@ -32,9 +35,6 @@ apply = ['defer']
 [plugins.forgit]
 github = 'wfxr/forgit'
 apply = ["defer"]
-
-# [plugins.spaceship]
-# github = 'spaceship-prompt/spaceship-prompt'
 
 [plugins.substr-search]
 github = 'zsh-users/zsh-history-substring-search'

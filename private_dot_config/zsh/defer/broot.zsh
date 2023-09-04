@@ -1,7 +1,7 @@
-if ! command -v broot &> /dev/null
-then
-    exit
-fi
+# if ! command -v broot &> /dev/null
+# then
+#     exit
+# fi
 
 # function br {
 #     local cmd cmd_file code

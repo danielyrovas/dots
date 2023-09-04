@@ -1,5 +1,4 @@
-# VI keymaps for line editing
-bindkey -v
+bindkey -v # VI keymaps for line editing
 bindkey "^A"    beginning-of-line                    # ctrl-a
 bindkey "^E"    end-of-line                          # ctrl-e
 bindkey "^[[3~" delete-char                          # DEL
