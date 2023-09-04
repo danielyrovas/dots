@@ -1,0 +1,18 @@
+{
+    "neoconf": {
+        "plugins": {
+            "lua_ls":{ "enabled": true },
+            "jsonls": { "configured_servers_only": true}
+
+        }
+    }
+    // "lspconfig": {
+    //     "lua_ls": {
+    //         "Lua.diagnostics.globals": ["vim"],
+    //         "Lua.workspace.library": [
+    //             "$VIMRUNTIME/lua",
+    //             "$VIMRUNTIME/lua/vim/lsp"
+    //         ]
+    //     }
+    // }
+}
