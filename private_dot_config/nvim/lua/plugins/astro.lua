@@ -1,18 +1,6 @@
 if true then return {} end
 return {
   {
-    "stevearc/oil.nvim",
-    opts = {},
-    cmd = "Oil",
-    keys = {
-      {
-        "-",
-        function() require("oil").open() end,
-        desc = "Open folder in Oil",
-      },
-    },
-  },
-  {
     "danymat/neogen",
     cmd = "Neogen",
     opts = {
