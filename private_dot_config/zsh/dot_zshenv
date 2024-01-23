@@ -47,3 +47,6 @@ export FZF_DEFAULT_OPTS='--layout=reverse --border' # --height 40%
 export FZ_HISTORY_CD_CMD=_zlua
 
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/share/go/bin:$PATH"
+export PATH="$HOME/.local/share/gem/bin:$PATH"
+export PATH="$HOME/.local/share/cargo/bin:$PATH"

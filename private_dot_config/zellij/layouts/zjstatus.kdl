@@ -8,6 +8,7 @@ layout {
             format_left  "{mode} #[fg=#89B4FA,bold]{session} {tabs}"
             format_right "{datetime}"
             format_space ""
+            // gitmux | sd '#\[[^\]]+\]' ''
 
             hide_frame_for_single_pane "true"
 

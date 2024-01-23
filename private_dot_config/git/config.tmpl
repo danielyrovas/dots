@@ -41,6 +41,7 @@
     spush = push --recurse-submodules=on-demand
     supdate = submodule update --remote --merge
     publish = !git push --set-upstream origin \"$(git rev-parse --abbrev-ref HEAD)\"
+    reset-hard = "!f() { git reset --hard; git clean -df ; }; f"
     alias = ! git config --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ /
 [pull]
     ff = only
@@ -84,3 +85,5 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 [sequence]
 	editor = interactive-rebase-tool
+[merge "ours"]
+	driver = true
