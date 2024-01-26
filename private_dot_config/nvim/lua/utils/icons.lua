@@ -58,4 +58,5 @@ return {
   Terminal = "",
   Window = "",
   WordFile = "󰈭",
+  Separator = "",
 }

@@ -1,6 +1,7 @@
 return {
     {
         "echasnovski/mini.files",
+        enabled = false,
         opts = {
             options = { use_as_default_explorer = true },
             windows = { preview = true },
@@ -20,7 +21,7 @@ return {
         },
         keys = {
             {
-                "-",
+                "_",
                 function() require("mini.files").open() end,
                 desc = "Open folder in Mini.Files",
             },

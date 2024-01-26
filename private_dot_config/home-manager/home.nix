@@ -14,6 +14,10 @@
     pkgs.neovim
     pkgs.git
     pkgs.chezmoi
+    pkgs.ripgrep
+    pkgs.bat
+    pkgs.fd
+    pkgs.sd
   ];
 
   home.file = { 

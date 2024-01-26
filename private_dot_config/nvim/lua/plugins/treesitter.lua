@@ -25,7 +25,6 @@ return {
   opts = {
     setup = { ensure_installed = "maintained", },
     autotag = { enable = true },
-    context_commentstring = { enable = true, enable_autocmd = false },
     highlight = {
       enable = true,
       disable = function(_, bufnr) return vim.b[bufnr].large_buf end,
@@ -98,5 +97,13 @@ return {
       },
     },
   },
-  config = function(_, opts) require("nvim-treesitter.configs").setup(opts) end,
+  config = function(_, opts)
+    require("nvim-treesitter.configs").setup(opts)
+    require('ts_context_commentstring').setup {
+      enable_autocmd = false,
+      languages = {
+        typescript = '// %s',
+      },
+    }
+  end,
 }

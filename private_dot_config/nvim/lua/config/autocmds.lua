@@ -66,160 +66,50 @@ autocmd("ColorScheme", {
   end,
 })
 
-autocmd("BufEnter", {
-  desc = "Quit Nvim if more than one window is open and only sidebar windows are list",
-  group = augroup("auto_quit", { clear = true }),
-  callback = function()
-    local wins = vim.api.nvim_tabpage_list_wins(0)
-    -- Both neo-tree and aerial will auto-quit if there is only a single window left
-    if #wins <= 1 then return end
-    local sidebar_fts = { aerial = true, ["neo-tree"] = true }
-    for _, winid in ipairs(wins) do
-      if vim.api.nvim_win_is_valid(winid) then
-        local bufnr = vim.api.nvim_win_get_buf(winid)
-        local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-        -- If any visible windows are not sidebars, early return
-        if not sidebar_fts[filetype] then
-          return
-          -- If the visible window is a sidebar
-        else
-          -- only count filetypes once, so remove a found sidebar from the detection
-          sidebar_fts[filetype] = nil
-        end
-      end
-    end
-    if #vim.api.nvim_list_tabpages() > 1 then
-      vim.cmd.tabclose()
-    else
-      vim.cmd.qall()
-    end
-  end,
-})
+-- if false and is_available "nvim-tree.lua" then
+--   autocmd("VimEnter", {
+--     desc = "Open nvim-tree.lua on startup with directory",
+--     group = augroup("nvimtree_start", { clear = true }),
+--     callback = function()
+--       if package.loaded["nvim-tree.lua"] then
+--         vim.api.nvim_del_augroup_by_name "nvimtree_start"
+--       else
+--         local stats = (vim.uv or vim.loop).fs_stat(vim.api.nvim_buf_get_name(0)) -- TODO: REMOVE vim.loop WHEN DROPPING SUPPORT FOR Neovim v0.9
+--         if stats and stats.type == "directory" then
+--           vim.api.nvim_del_augroup_by_name "nvimtree_start"
+--           require "nvim-tree.lua"
+--         end
+--       end
+--     end,
+--   })
+-- end
 
-if is_available "alpha-nvim" then
-  autocmd({ "User", "BufEnter" }, {
-    desc = "Disable status, tablines, and cmdheight for alpha",
-    group = augroup("alpha_settings", { clear = true }),
-    callback = function(args)
-      if
-          (
-            (args.event == "User" and args.file == "AlphaReady")
-            or (
-              args.event == "BufEnter"
-              and vim.api.nvim_get_option_value("filetype", { buf = args.buf }) == "alpha"
-            )
-          ) and not vim.g.before_alpha
-      then
-        vim.g.before_alpha = {
-          showtabline = vim.opt.showtabline:get(),
-          laststatus = vim.opt.laststatus:get(),
-          cmdheight = vim.opt.cmdheight:get(),
-        }
-        vim.opt.showtabline, vim.opt.laststatus, vim.opt.cmdheight = 0, 0, 0
-      elseif
-          vim.g.before_alpha
-          and args.event == "BufEnter"
-          and vim.api.nvim_get_option_value("buftype", { buf = args.buf }) ~= "nofile"
-      then
-        vim.opt.laststatus, vim.opt.showtabline, vim.opt.cmdheight =
-            vim.g.before_alpha.laststatus,
-            vim.g.before_alpha.showtabline,
-            vim.g.before_alpha.cmdheight
-        vim.g.before_alpha = nil
-      end
-    end,
-  })
-  autocmd("VimEnter", {
-    desc = "Start Alpha when vim is opened with no arguments",
-    group = augroup("alpha_autostart", { clear = true }),
-    callback = function()
-      local should_skip = false
-      if vim.fn.argc() > 0 or vim.fn.line2byte(vim.fn.line "$") ~= -1 or not vim.o.modifiable then
-        should_skip = true
-      else
-        for _, arg in pairs(vim.v.argv) do
-          if arg == "-b" or arg == "-c" or vim.startswith(arg, "+") or arg == "-S" then
-            should_skip = true
-            break
-          end
-        end
-      end
-      if not should_skip then
-        require("alpha").start(true, require("alpha").default_config)
-        vim.schedule(function() vim.cmd.doautocmd "FileType" end)
-      end
-    end,
-  })
-end
+if is_available "oil.nvim" then
+  -- autocmd("BufEnter", {
+  --   desc = "Open oil.nvim on startup with directory",
+  --   group = augroup("oil_start", { clear = true }),
+  --   callback = function()
+  --     if package.loaded["oil.nvim"] then
+  --       vim.api.nvim_del_augroup_by_name "oil_start"
+  --     else
+  --       local stats = (vim.uv or vim.loop).fs_stat(vim.api.nvim_buf_get_name(0)) -- TODO: REMOVE vim.loop WHEN DROPPING SUPPORT FOR Neovim v0.9
+  --       if stats and stats.type == "directory" then
+  --         require("oil.nvim").open()
+  --         -- vim.cmd "Oil"
+  --         vim.api.nvim_del_augroup_by_name "oil_start"
+  --       end
+  --     end
+  --   end,
+  -- })
 
-if is_available "neo-tree.nvim" then
-  autocmd("BufEnter", {
-    desc = "Open Neo-Tree on startup with directory",
-    group = augroup("neotree_start", { clear = true }),
-    callback = function()
-      if package.loaded["neo-tree"] then
-        vim.api.nvim_del_augroup_by_name "neotree_start"
-      else
-        local stats = (vim.uv or vim.loop).fs_stat(vim.api.nvim_buf_get_name(0)) -- TODO: REMOVE vim.loop WHEN DROPPING SUPPORT FOR Neovim v0.9
-        if stats and stats.type == "directory" then
-          vim.api.nvim_del_augroup_by_name "neotree_start"
-          require "neo-tree"
-        end
+  autocmd("User", {
+    desc = "Open oil.nvim preview automatically",
+    pattern = "OilEnter",
+    callback = vim.schedule_wrap(function(args)
+      local oil = require("oil")
+      if vim.api.nvim_get_current_buf() == args.data.buf and oil.get_cursor_entry() then
+        oil.select({ preview = true })
       end
-    end,
-  })
-end
-
-if false and is_available "nvim-tree.lua" then
-  autocmd("VimEnter", {
-    desc = "Open nvim-tree.lua on startup with directory",
-    group = augroup("nvimtree_start", { clear = true }),
-    callback = function()
-      if package.loaded["nvim-tree.lua"] then
-        vim.api.nvim_del_augroup_by_name "nvimtree_start"
-      else
-        local stats = (vim.uv or vim.loop).fs_stat(vim.api.nvim_buf_get_name(0)) -- TODO: REMOVE vim.loop WHEN DROPPING SUPPORT FOR Neovim v0.9
-        if stats and stats.type == "directory" then
-          vim.api.nvim_del_augroup_by_name "nvimtree_start"
-          require "nvim-tree.lua"
-        end
-      end
-    end,
-  })
-end
-
-if false and is_available "fern.vim" then
-  autocmd("BufEnter", {
-    desc = "Open Fern.vim on startup with directory",
-    group = augroup("fern_start", { clear = true }),
-    callback = function()
-      if package.loaded["fern.vim"] then
-        vim.api.nvim_del_augroup_by_name "fern_start"
-      else
-        local stats = (vim.uv or vim.loop).fs_stat(vim.api.nvim_buf_get_name(0)) -- TODO: REMOVE vim.loop WHEN DROPPING SUPPORT FOR Neovim v0.9
-        if stats and stats.type == "directory" then
-          vim.api.nvim_del_augroup_by_name "fern_start"
-          require "fern.vim"
-        end
-      end
-    end,
-  })
-end
-
-if false and is_available "oil.nvim" then
-  autocmd("BufEnter", {
-    desc = "Open oil.nvim on startup with directory",
-    group = augroup("oil_start", { clear = true }),
-    callback = function()
-      if package.loaded["oil.nvim"] then
-        vim.api.nvim_del_augroup_by_name "oil_start"
-      else
-        local stats = (vim.uv or vim.loop).fs_stat(vim.api.nvim_buf_get_name(0)) -- TODO: REMOVE vim.loop WHEN DROPPING SUPPORT FOR Neovim v0.9
-        if stats and stats.type == "directory" then
-          require("oil.nvim").open()
-          vim.api.nvim_del_augroup_by_name "oil_start"
-        end
-      end
-    end,
+    end),
   })
 end
