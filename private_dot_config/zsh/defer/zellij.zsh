@@ -19,3 +19,11 @@ _zellij_auto_attach() {
     fi
 }
 alias s=_zellij_auto_attach
+
+_zellij_auto_attach_2() {
+    if [[ -z "$ZELLIJ" ]]; then
+        # zellij attach --layout zjstatus -c experimental 
+        zellij attach experimental 2&> /dev/null || zellij -s experimental -l zjstatus
+    fi
+}
+alias ss=_zellij_auto_attach_2

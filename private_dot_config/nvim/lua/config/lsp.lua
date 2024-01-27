@@ -1,13 +1,15 @@
 local lsp_config = {
     lua_ls = {
-        formatting = { enabled = false },
+        formatting = { enabled = true },
         settings = {
             Lua = {
+                runtime = { version = 'LuaJIT' },
                 workspace = {
+                    checkThirdParty = false,
                     library = {
-                        [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-                        [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-                        [vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy"] = true,
+                        vim.env.VIMRUNTIME .. "/lua",
+                        vim.env.VIMRUNTIME .. "/lua/vim/lsp",
+                        vim.fn.stdpath "data" .. "/lazy/lazy.nvim/lua/lazy",
                     },
                     maxPreload = 100000,
                     preloadFileSize = 10000,
@@ -37,6 +39,10 @@ local lsp_config = {
     biome = {
         enabled = false,
     },
+    nil_ls = {},
+    jsonls = {},
+    dockerls = {},
+    ruby_ls = {},
 }
 
 local is_available = require("utils").is_available

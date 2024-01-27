@@ -185,7 +185,7 @@ return function(client, bufnr)
 
     if client.supports_method "textDocument/formatting" then
         local settings = require("config.lsp")[client.name]
-        if settings.formatting and settings.formatting.enabled == false then return end
+        if settings and settings.formatting and settings.formatting.enabled == false then return end
         maps.n["<leader>lf"] = {
             function() vim.lsp.buf.format() end,
             desc = "Format buffer",

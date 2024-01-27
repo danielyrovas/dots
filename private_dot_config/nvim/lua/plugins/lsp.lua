@@ -1,40 +1,38 @@
 local lspconfig_setup = function()
   local on_attach = require "config.lsp-on-attach"
-  local servers = require "config.servers"
+  local lsp_servers = require "config.lsp"
   local lspconfig = require "lspconfig"
   local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-  local mason_servers = {} -- require("mason-lspconfig").get_installed_servers()
-  local settings = require "config.lsp"
+  -- local mason_servers = require("mason-lspconfig").get_installed_servers()
 
-  for _, server in ipairs(vim.list_extend(servers.external, mason_servers)) do
-    local opts = settings[server] or {}
+  for server, opts in pairs(lsp_servers) do
     opts.capabilities = lsp_capabilities
     opts.on_attach = on_attach
     lspconfig[server].setup(opts)
   end
 end
 
-local mason_lspconfig_setup = function()
-  local servers = require "config.servers"
-  require("mason-lspconfig").setup()
-  vim.api.nvim_create_user_command(
-    "LspInstallAll",
-    function() vim.cmd("LspInstall " .. table.concat(servers.mason_lsp, " ")) end,
-    {}
-  )
-end
+-- local mason_lspconfig_setup = function()
+--   local servers = require "config.servers"
+--   require("mason-lspconfig").setup()
+--   vim.api.nvim_create_user_command(
+--     "LspInstallAll",
+--     function() vim.cmd("LspInstall " .. table.concat(servers.mason_lsp, " ")) end,
+--     {}
+--   )
+-- end
 
-local mason_setup = function(_, opts)
-  local servers = require "config.servers"
-  require("mason").setup(opts)
-  if not vim.tbl_isempty(servers.mason) then
-    vim.api.nvim_create_user_command(
-      "MasonInstallAll",
-      function() vim.cmd("MasonInstall " .. table.concat(servers.mason, " ")) end,
-      {}
-    )
-  end
-end
+-- local mason_setup = function(_, opts)
+--   local servers = require "config.servers"
+--   require("mason").setup(opts)
+--   if not vim.tbl_isempty(servers.mason) then
+--     vim.api.nvim_create_user_command(
+--       "MasonInstallAll",
+--       function() vim.cmd("MasonInstall " .. table.concat(servers.mason, " ")) end,
+--       {}
+--     )
+--   end
+-- end
 
 return {
   {

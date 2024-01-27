@@ -15,13 +15,8 @@ return {
 
   "b0o/SchemaStore.nvim",
   "folke/neodev.nvim",
-  "jose-elias-alvarez/null-ls.nvim",
-  "jay-babu/mason-null-ls.nvim",
   -- ui
   "NvChad/nvim-colorizer.lua",
-  "stevearc/dressing.nvim",
-  "rcarriga/nvim-notify",
-  "https://github.com/folke/noice.nvim",
   "MunifTanjim/nui.nvim",
   "nvim-neo-tree/neo-tree.nvim",
 
@@ -57,11 +52,6 @@ return {
 
   "echasnovski/mini.bufremove",
   { "max397574/better-escape.nvim", event = "InsertCharPre", opts = { timeout = 300 } },
-  {
-    "NMAC427/guess-indent.nvim",
-    event = "User AstroFile",
-    config = require "plugins.configs.guess-indent",
-  },
   { -- TODO: REMOVE neovim-session-manager with AstroNvim v4
     "Shatur/neovim-session-manager",
     event = "BufWritePost",

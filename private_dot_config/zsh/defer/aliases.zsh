@@ -37,7 +37,7 @@ alias \
 alias \
   chez="chezmoi" \
   cheza="chezmoi add" \
-  chezaddnvim="chezmoi add ~/.config/nvim/lua/custom"
+  chezaddnvim="chezmoi add ~/.config/nvim/init.lua;chezmoi add ~/.config/nvim/lua/;chezmoi add ~/.config/nvim/neoconf.json;chezmoi add ~/.config/nvim/spell/en.utf-8.add;chezmoi add ~/.config/nvim/lazy-lock.json"
 
 alias \
   tl="tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr"

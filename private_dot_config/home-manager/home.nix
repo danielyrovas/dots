@@ -11,13 +11,22 @@
     pkgs.helix
     pkgs.just
     (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-    pkgs.neovim
     pkgs.git
     pkgs.chezmoi
     pkgs.ripgrep
     pkgs.bat
     pkgs.fd
     pkgs.sd
+    pkgs.neovim
+
+    # Lsp servers
+    pkgs.nil
+    pkgs.lua-language-server
+    pkgs.yaml-language-server
+    pkgs.vscode-langservers-extracted
+    pkgs.dockerfile-language-server-nodejs
+    pkgs.ruby-lsp
+    pkgs.ruby
   ];
 
   home.file = { 
