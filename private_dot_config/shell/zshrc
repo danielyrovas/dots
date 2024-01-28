@@ -1,0 +1,161 @@
+export PATH="$HOME/.nix-profile/bin:/nix/var/nix/profiles/default/bin:$PATH"
+
+# if not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+VIMRC_INIT='let $MYVIMRC = "$XDG_CONFIG_HOME/vim/vimrc" | so $MYVIMRC'
+alias vim="VIMINIT='$VIMRC_INIT' vim"
+
+if [[ -r "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "$XDG_CACHE_HOME/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
+[[ ! -f ~/.config/shell/p10k.zsh ]] || source ~/.config/shell/p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+## OPTIONS
+
+HISTFILE=~/.cache/histfile
+HISTSIZE=500000
+SAVEHIST=500000
+setopt INC_APPEND_HISTORY
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_DUPS
+setopt extendedglob nomatch notify
+unsetopt beep
+
+setopt AUTO_CD
+setopt GLOB_DOTS
+setopt NOMATCH
+setopt MENU_COMPLETE
+setopt EXTENDED_GLOB
+setopt INTERACTIVE_COMMENTS
+setopt AUTO_PARAM_SLASH
+setopt BANG_HIST
+setopt SHARE_HISTORY
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+autoload -Uz colors && colors
+# bindkey -M menuselect '?' history-incremental-search-forward
+# bindkey -M menuselect '/' history-incremental-search-backward
+
+
+## KEYS
+bindkey -v # VI keymaps for line editing
+bindkey "^A"    beginning-of-line                    # ctrl-a
+bindkey "^E"    end-of-line                          # ctrl-e
+bindkey "^[[3~" delete-char                          # DEL
+bindkey "^[[B"  down-line-or-search                  # ctrl-n
+bindkey "^[[A"  up-line-or-search                    # ctrl-p
+# bindkey "^R"    history-incremental-search-backward  # ctrl-r
+bindkey "^N"    history-search-forward               # down arrow
+bindkey "^P"    history-search-backward              # up arrow
+
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey "^F" edit-command-line
+bindkey -M vicmd "^F" edit-command-line
+bindkey -M vicmd v edit-command-line
+
+# zstyle :compinstall filename "$XDG_CONFIG_HOME/zsh/.zshrc"
+autoload -Uz compinit
+compinit
+
+source "$XDG_CONFIG_HOME/shell/colourscheme.catppuccin.zsh"
+
+# type starship &>/dev/null && \ # not using starship
+#     eval "$(starship init zsh)"
+
+type sheldon &>/dev/null && \
+    eval "$(sheldon source)"
+eval "$(zoxide init zsh)"
+
+if type brew &> /dev/null
+    brew_prefix=/opt/homebrew
+    FPATH="$brew_prefix/share/zsh/site-functions:${FPATH}"
+    export HOMEBREW_CASK_OPTS="--no-quarantine"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+then
+fi
+
+type atuin &> /dev/null && \
+    eval "$(atuin init zsh --disable-up-arrow)"
+
+if command -v bat >/dev/null 2>&1; then
+  alias rcat=$(which cat)
+  alias cat=$(which bat)
+  export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+fi
+
+## TODO: refactor
+
+# 'ls' after every 'cd'
+if ! (( $chpwd_functions[(I)chpwd_cdls] )); then
+    chpwd_functions+=(chpwd_cdls)
+fi
+function chpwd_cdls() {
+    if [[ -o interactive ]]; then
+        emulate -L zsh
+        ls
+    fi
+}
+
+# autocompile with gcc
+_compile_c () {     
+   gcc $1 -Wall -pedantic -std=c11 -lm -o ${1%.*}
+}
+_compile_debug_c () {     
+   gcc $1 -Wall -DDEBUG -pedantic -std=c11 -lm -o ${1%.*}
+}
+alias \
+    gc='_compile_c' \
+    gcd='_compile_debug_c'
+
+# export NVIM_APPNAME="nvim" # default config
+alias nvchad="NVIM_APPNAME=NvChad nvim"
+alias nvastro="NVIM_APPNAME=AstroNvim nvim"
+alias nvlazy="NVIM_APPNAME=LazyVim nvim"
+
+nvims() {
+  items=("default" "LazyVim" "NvChad" "AstroNvim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+## Auto attach to zellij session
+_zellij_auto_attach() {
+    if [[ -z "$ZELLIJ" ]]; then
+        zellij attach -c session
+    fi
+}
+alias s=_zellij_auto_attach
+
+_zellij_auto_attach_2() {
+    if [[ -z "$ZELLIJ" ]]; then
+        # zellij attach --layout zjstatus -c experimental 
+        zellij attach experimental 2&> /dev/null || zellij -s experimental -l zjstatus
+    fi
+}
+alias ss=_zellij_auto_attach_2
+# eval "$(rtx activate zsh)" # is RTX still needed?
+## END todo
+
+export GARGLE="NIXSWEEP"
