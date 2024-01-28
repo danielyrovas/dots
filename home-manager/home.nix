@@ -20,7 +20,7 @@ let
     ip = "ip -color=auto";
 
 # Eza
-    ls = "eza --group-directories-first --icons";
+    ls = "eza --group-directories-first --icons always";
     la = "ls -a";
     ll = "ls -lh --git";
     lla = "ll -a";

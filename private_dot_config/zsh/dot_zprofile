@@ -1,4 +1,0 @@
-type brew &>/dev/null && \
-    brew_prefix=/opt/homebrew
-    FPATH="$brew_prefix/share/zsh/site-functions:${FPATH}"
-source $ZDOTDIR/src/homebrew.zsh
