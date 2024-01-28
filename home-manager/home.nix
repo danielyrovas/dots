@@ -65,8 +65,6 @@ let
 # Cleanup
 
     # ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
-    # _ZL_DATA = "$XDG_CACHE_HOME/z";
-    # INPUTRC = "$XDG_CONFIG_HOME/shell/inputrc";
 
     GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0";
     LESSHISTFILE = "$XDG_CACHE_HOME/less/history";
@@ -82,8 +80,8 @@ let
     ELECTRUMDIR = "$XDG_DATA_HOME/electrum";
     GNUPGHOME = "$XDG_DATA_HOME/gnupg";
     SOLARGRAPH_CACHE = "$XDG_DATA_HOME/solargraph";
-    ANDROID_HOME = "$XDG_DATA_HOME/android";
-    ANDROID_SDK_HOME = "$XDG_CONFIG_HOME/android";
+    # ANDROID_HOME = "$XDG_DATA_HOME/android";
+    # ANDROID_SDK_HOME = "$XDG_CONFIG_HOME/android";
     GEM_HOME = "$XDG_DATA_HOME/gem";
     GEM_SPEC_CACHE = "$XDG_CACHE_HOME/gem";
     GRADLE_USER_HOME = "$XDG_DATA_HOME/gradle";
@@ -138,13 +136,13 @@ in
 
 
   programs.home-manager.enable = true;
-  programs.fish = {
-    enable = false;
-    shellAliases = aliases;
-    plugins = [
-      { name = "grc"; src = pkgs.fishPlugins.grc.src; }
-    ];
-  };
+  # programs.fish = {
+  #   enable = false;
+  #   shellAliases = aliases;
+  #   plugins = [
+  #     { name = "grc"; src = pkgs.fishPlugins.grc.src; }
+  #   ];
+  # };
 
   programs.bash = {
     enable = true;
@@ -154,46 +152,22 @@ in
   programs.zsh = {
     enable = true;
     shellAliases = aliases;
-    # plugins = with zsh_plugins; trace "++zsh plugin list: ${lib.concatMapStringsSep "," (x: x.name) plugin_list}" plugin_list;
-    # setOptions = [
-    #   "extendedglob"
-    #   "incappendhistory"
-    #   "sharehistory"
-    #   "histignoredups"
-    #   "histfcntllock"
-    #   "histreduceblanks"
-    #   "histignorespace"
-    #   "histallowclobber"
-    #   "autocd"
-    #   "cdablevars"
-    #   "nomultios"
-    #   "pushdignoredups"
-    #   "autocontinue"
-    #   "promptsubst"
-    # ];
-
-      # bindkey '^[[A' history-substring-search-up
-      # bindkey '^[[B' history-substring-search-down
+    # histFile = "${config.xdg.dataHome}/zsh/history";
     initExtra = ''
       ${builtins.readFile ../private_dot_config/shell/zshrc}
     '';
+    # plugins = with zsh_plugins; trace "++zsh plugin list: ${lib.concatMapStringsSep "," (x: x.name) plugin_list}" plugin_list;
     # plugins = [
-    #   {
-    #     name = "zsh-nix-shell";
-    #     file = "nix-shell.plugin.zsh";
-    #     src = pkgs.fetchFromGitHub {
-    #       owner = "chisui";
-    #       repo = "zsh-nix-shell";
-    #       rev = "v0.8.0";
-    #       sha256 = "1lzrn0n4fxfcgg65v0qhnj7wnybybqzs4adz7xsrkgmcsr0ii8b7";
-    #     };
-    #   }
+    # {
+    #   name = "zinsults";
+    #   src = builtins.fetchTarball "https://github.com/ahmubashshir/zinsults/archive/master.tar.gz";
+    # }
+    #
     # ];
   };
 
-
   home = {
-    file = { };
+    # file = { };
     sessionVariables = env;
     sessionPath = path;
     stateVersion = "23.11";
