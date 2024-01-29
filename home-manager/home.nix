@@ -3,6 +3,7 @@ let
   aliases = {
     s = "zellij attach session --create";
     nv = "nvim";
+    hms = "git add .;home-manager switch --flake ."; # stage current changes and switch - must be in dir
 
 # Verbosity settings
     cp = "cp -iv";
@@ -108,21 +109,23 @@ in
   };
 
   home.packages = with pkgs; [
-    helix
-    just
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    just ripgrep eza bat fd sd zoxide fzf btop
+    # bottom # mostly useless compared to btop ?
     git
     chezmoi
-    ripgrep
-    bat
-    fd
-    sd
+    zellij
     neovim
-    eza
+    helix
     zsh-completions
-    zoxide
-    fzf
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     # sheldon # no m1 build
+    # disfetch neofetch lolcat cowsay onefetch starfetch # memes
+
+    # GUI Apps: most likely need to be installed elsewise due to issues with graphical apps on nix
+    # options are install with flatpak, homebrew, or package layering
+    # wezterm
+    # cosmic-term
+    # fuzzel # rofi like launcher
 
     # Lsp servers
     nil
@@ -131,6 +134,9 @@ in
     vscode-langservers-extracted
     dockerfile-language-server-nodejs
     ruby-lsp
+
+    # Dev environments
+    # direnv nix-direnv
     ruby
   ];
 
