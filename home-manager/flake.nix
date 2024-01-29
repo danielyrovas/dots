@@ -23,6 +23,7 @@
 
         modules = [ 
           ./home.nix
+          ./dev.nix
           ./${work.username}-${work.hostname}.nix
           ({
            nixpkgs.overlays = [inputs.neovim.overlay ];
@@ -34,6 +35,8 @@
 
         modules = [ 
           ./home.nix
+          ./dev.nix
+          ./gui.nix # maybe ?
           ./${desktop.username}-${desktop.hostname}.nix
           ({
            nixpkgs.overlays = [inputs.neovim.overlay ];

@@ -5,7 +5,7 @@ let
     nv = "nvim";
     hms = "echo \"staging changes in $(pwd)\";git add .;home-manager switch --flake ."; # stage current changes and switch - must be in dir
 
-# Verbosity settings
+    # Verbosity settings
     cp = "cp -iv";
     mv = "mv -iv";
     rm = "rm -vI";
@@ -13,14 +13,14 @@ let
     mkd = "mkdir -pv";
     # "..." = "../..";
 
-# Colourize commands when possible.
+    # Colourize commands when possible.
     # ls = "ls -h --color=auto"; not needed while using eza
     grep = "grep --color=auto";
     diff = "diff --color=auto";
     ccat = "highlight --out-format=ansi";
     ip = "ip -color=auto";
 
-# Eza
+    # Eza
     ls = "eza --group-directories-first --icons always";
     la = "ls -a";
     ll = "ls -lh --git";
@@ -39,9 +39,6 @@ let
     tl = "tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr";
 
     rmquarantine = "xattr -d com.apple.quarantine";
-
-    # rcat = "$(which cat)";
-    # cat = "$(which bat)";
   };
   path = [
     "$HOME/bin"
@@ -64,9 +61,6 @@ let
     INPUTRC = "$XDG_CONFIG_HOME/shell/inputrc";
 
 # Cleanup
-
-    # ZDOTDIR = "$XDG_CONFIG_HOME/zsh";
-
     GTK2_RC_FILES = "$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0";
     LESSHISTFILE = "$XDG_CACHE_HOME/less/history";
     WGETRC = "$XDG_CONFIG_HOME/wget/wgetrc";
@@ -109,51 +103,20 @@ in
   };
 
   home.packages = with pkgs; [
-    just ripgrep eza bat fd sd zoxide fzf btop
-    # bottom # mostly useless compared to btop ?
-    git
+    # Basic packages
+    just ripgrep eza bat fd sd zoxide fzf btop git
     chezmoi
     zellij
     neovim
-    helix
     zsh-completions
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     # sheldon # no m1 build
-    # disfetch neofetch lolcat cowsay onefetch starfetch # memes
-
-    # GUI Apps: most likely need to be installed elsewise due to issues with graphical apps on nix
-    # options are install with flatpak, homebrew, or package layering
-    # wezterm
-    # cosmic-term
-    # fuzzel # rofi like launcher
-
-    # Lsp servers
-    nil
-    lua-language-server
-    yaml-language-server
-    vscode-langservers-extracted
-    dockerfile-language-server-nodejs
-    ruby-lsp
-
-    # Dev environments
-    # direnv nix-direnv
-    ruby
   ];
 
 
   programs.home-manager.enable = true;
-  # programs.fish = {
-  #   enable = false;
-  #   shellAliases = aliases;
-  #   plugins = [
-  #     { name = "grc"; src = pkgs.fishPlugins.grc.src; }
-  #   ];
-  # };
 
-  programs.bash = {
-    enable = true;
-    shellAliases = aliases;
-  };
+  programs.bash = { enable = true; shellAliases = aliases; };
 
   programs.zsh = {
     enable = true;
