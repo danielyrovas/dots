@@ -11,18 +11,30 @@
 
   outputs = { nixpkgs, home-manager, ... }@inputs:
     let
-      system = "aarch64-darwin";
-      username = "daniel.savory";
-      hostname = "M1330";
-      pkgs = nixpkgs.legacyPackages.${system};
+      work.username = "daniel.savory";
+      work.system = "aarch64-darwin";
+      work.hostname = "M1330";
+      desktop.username = "danielyrovas";
+      desktop.system = "x86_64-linux";
+      desktop.hostname = "desktop";
     in {
-      homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      homeConfigurations.${work.username} = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${work.system};
 
         modules = [ 
           ./home.nix
-          # ./zsh_plugins.nix
-          ./${hostname}/${username}.nix
+          ./${work.username}-${work.hostname}.nix
+          ({
+           nixpkgs.overlays = [inputs.neovim.overlay ];
+          })
+        ];
+      };
+      homeConfigurations.${desktop.username} = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${desktop.system};
+
+        modules = [ 
+          ./home.nix
+          ./${desktop.username}-${desktop.hostname}.nix
           ({
            nixpkgs.overlays = [inputs.neovim.overlay ];
           })

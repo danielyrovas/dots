@@ -54,14 +54,16 @@ autoload -Uz colors && colors
 
 ## KEYS
 bindkey -v # VI keymaps for line editing
-bindkey "^A"    beginning-of-line                    # ctrl-a
-bindkey "^E"    end-of-line                          # ctrl-e
-bindkey "^[[3~" delete-char                          # DEL
-bindkey "^[[B"  down-line-or-search                  # ctrl-n
-bindkey "^[[A"  up-line-or-search                    # ctrl-p
-# bindkey "^R"    history-incremental-search-backward  # ctrl-r
-bindkey "^N"    history-search-forward               # down arrow
-bindkey "^P"    history-search-backward              # up arrow
+bindkey "^A"    beginning-of-line                       # ctrl-a
+bindkey "^E"    end-of-line                             # ctrl-e
+bindkey "^U"    kill-whole-line                         # ctrl-u
+bindkey "^Y"    yank                                    # ctrl-y
+bindkey "^[[3~" delete-char                             # DEL
+bindkey "^[[B"  down-line-or-search                     # ctrl-n
+bindkey "^[[A"  up-line-or-search                       # ctrl-p
+# bindkey "^R"    history-incremental-search-backward   # ctrl-r
+bindkey "^N"    history-search-forward                  # down arrow
+bindkey "^P"    history-search-backward                 # up arrow
 
 autoload -U edit-command-line
 zle -N edit-command-line

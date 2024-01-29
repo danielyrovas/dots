@@ -3,7 +3,7 @@ let
   aliases = {
     s = "zellij attach session --create";
     nv = "nvim";
-    hms = "git add .;home-manager switch --flake ."; # stage current changes and switch - must be in dir
+    hms = "echo \"staging changes in $(pwd)\";git add .;home-manager switch --flake ."; # stage current changes and switch - must be in dir
 
 # Verbosity settings
     cp = "cp -iv";
