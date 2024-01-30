@@ -42,9 +42,18 @@ in
     plugins = with pkgs.vimPlugins; [ treesitter ];
   };
 
-  # home.packages = with pkgs; [
-  #   tree-sitter
-  # ];
+  home.packages = with pkgs; [
+    tree-sitter
+
+    # Lsp servers
+    nil
+    lua-language-server
+    yaml-language-server
+    vscode-langservers-extracted
+    dockerfile-language-server-nodejs
+    ruby-lsp
+    taplo
+  ];
 
   home.file.".config/nvim/lua/config/tspath.lua".text = ''
     -- Add Treesitter Plugin Path
