@@ -43,6 +43,7 @@ local lsp_config = {
     jsonls = {},
     dockerls = {},
     ruby_ls = {},
+    -- solargraph = {},
 }
 
 local is_available = require("utils").is_available
