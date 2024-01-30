@@ -1,9 +1,11 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  dev = true,
   dependencies = {
     "JoosepAlviste/nvim-ts-context-commentstring",
     "nvim-treesitter/nvim-treesitter-textobjects",
     "windwp/nvim-ts-autotag",
+    -- "nvim-treesitter/playground",
   },
   event = { "BufReadPost", "BufNewFile", "BufWritePost" },
   cmd = {
@@ -21,9 +23,9 @@ return {
     "TSUpdate",
     "TSUpdateSync",
   },
-  build = ":TSUpdate",
+  -- build = ":TSUpdate",
   opts = {
-    setup = { ensure_installed = "maintained", },
+    -- setup = { ensure_installed = "maintained", },
     autotag = { enable = true },
     highlight = {
       enable = true,
@@ -98,6 +100,7 @@ return {
     },
   },
   config = function(_, opts)
+    require("config.tspath")
     require("nvim-treesitter.configs").setup(opts)
     require('ts_context_commentstring').setup {
       enable_autocmd = false,

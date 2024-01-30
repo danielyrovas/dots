@@ -2,7 +2,6 @@
 {
   home.packages = with pkgs; [
     helix
-    neovim
     cosign
     tea
     tealdeer

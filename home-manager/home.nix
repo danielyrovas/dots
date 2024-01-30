@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{pkgs, ... }:
 let
   aliases = {
     s = "zellij attach session --create";
@@ -34,7 +34,7 @@ let
 
     chez = "chezmoi";
     cheza = "chezmoi add";
-    chezaddnvim = "chezmoi add ~/.config/nvim/init.lua;chezmoi add ~/.config/nvim/lua/;chezmoi add ~/.config/nvim/neoconf.json;chezmoi add ~/.config/nvim/spell/en.utf-8.add;chezmoi add ~/.config/nvim/lazy-lock.json";
+    chezaddnvim = "chezmoi add ~/.config/nvim/lua/;chezmoi add ~/.config/nvim/neoconf.json;chezmoi add ~/.config/nvim/spell/en.utf-8.add;chezmoi add ~/.config/nvim/lazy-lock.json";
 
     tl = "tldr --list | fzf --preview 'tldr {1} --color=always' --preview-window=right,70% | xargs tldr";
 

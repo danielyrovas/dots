@@ -24,6 +24,7 @@
         modules = [ 
           ./home.nix
           ./dev.nix
+          ./neovim.nix
           ./${work.username}-${work.hostname}.nix
           ({
            nixpkgs.overlays = [inputs.neovim.overlay ];

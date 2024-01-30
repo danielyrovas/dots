@@ -2,7 +2,8 @@ local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- bootstrap lazy.nvim
   -- stylua: ignore
-  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
+    lazypath })
   if vim.api.nvim_get_vvar "shell_error" ~= 0 then
     vim.api.nvim_err_writeln "Error cloning lazy.nvim repository...\n"
   end
@@ -32,6 +33,10 @@ lazy.setup {
   spec = {
     { import = "plugins" },
   },
+  dev = {
+    path = vim.fn.stdpath "data" .. "/nix",
+    fallback = false,
+  },
   defaults = {
     lazy = true,
     version = false,
@@ -44,8 +49,8 @@ lazy.setup {
     },
     reset_packpath = true, -- reset the package path to improve startup time
     rtp = {
-      reset = true, -- reset the runtime path to $VIMRUNTIME and your config directory
-      paths = {}, -- add any custom paths here that you want to include in the rtp
+      reset = true,        -- reset the runtime path to $VIMRUNTIME and your config directory
+      paths = {},          -- add any custom paths here that you want to include in the rtp
       disabled_plugins = vim.g.disabled_plugins,
     },
   },
