@@ -1,5 +1,8 @@
 {pkgs, ... }:
 let
+  env = {
+    EDITOR = "nvim";
+  };
   aliases = {
     s = "zellij attach session --create";
     nv = "nvim";
@@ -53,6 +56,7 @@ in
     just ripgrep eza bat fd sd zoxide fzf btop git
     chezmoi
     zellij
+    yazi
     bitwarden-cli
     vim
     zsh-completions
@@ -85,7 +89,7 @@ in
 
   home = {
     # file = { };
-    # sessionVariables = env;
+    sessionVariables = env;
     # sessionPath = path;
     stateVersion = "23.11";
   };

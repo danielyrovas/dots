@@ -77,12 +77,12 @@ compinit
 
 source "$XDG_CONFIG_HOME/shell/colourscheme.catppuccin.zsh"
 
-# type starship &>/dev/null && \ # not using starship
+# type starship &>/dev/null && \
 #     eval "$(starship init zsh)"
-
 type sheldon &>/dev/null && \
     eval "$(sheldon source)"
-eval "$(zoxide init zsh)"
+type zoxide &>/dev/null && \
+    eval "$(zoxide init zsh)"
 
 if type brew &> /dev/null
     brew_prefix=/opt/homebrew
@@ -129,18 +129,7 @@ alias \
 alias nvchad="NVIM_APPNAME=NvChad nvim"
 alias nvastro="NVIM_APPNAME=AstroNvim nvim"
 alias nvlazy="NVIM_APPNAME=LazyVim nvim"
-
-nvims() {
-  items=("default" "LazyVim" "NvChad" "AstroNvim")
-  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
-  if [[ -z $config ]]; then
-    echo "Nothing selected"
-    return 0
-  elif [[ $config == "default" ]]; then
-    config=""
-  fi
-  NVIM_APPNAME=$config nvim $@
-}
+alias nvd="NVIM_APPNAME=nvd nvim"
 
 ## Auto attach to zellij session
 _zellij_auto_attach() {
@@ -210,3 +199,4 @@ export PATH="$GEM_HOME/bin:$PATH"
 export PATH="$CARGO_HOME/bin:$PATH"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$PNPM_HOME:$PATH"
+export PATH="$XDG_DATA_HOME/npm/bin:$PATH"

@@ -18,8 +18,9 @@
     gitmux
     atuin
     delta
+    # starship
     # entr
-    # flyctl
+    flyctl
     # ffmpeg
     # incus-unwrapped
     # zlib
@@ -30,6 +31,10 @@
 
     # pandoc
     # sc-im
+
+    # JavaScript
+    # nodePackages_latest.pnpm
+    # nodePackages_latest.nodejs
   ];
 
   # programs.neovim.plugins = [
